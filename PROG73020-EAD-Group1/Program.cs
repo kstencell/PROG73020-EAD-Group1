@@ -1,7 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using PROG73020_EAD_Group1.Entities;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Get connection string from appsettings
+string connStr = builder.Configuration.GetConnectionString("ProjectDB");
+
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connStr));
 
 var app = builder.Build();
 
